@@ -14,9 +14,14 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         if (argc < 3) {
             printf("not enough args. Pass the image name and the scale value, in their respective order");
+            return 0;
         }
         NSString *filepath = [NSString stringWithCString:argv[1] encoding:NSUTF8StringEncoding];
         NSImage *img = [[NSImage alloc] initWithContentsOfFile:filepath];
+        if (!img) {
+            printf("input image not valid");
+            return 0;
+        }
         NSImageView *view = [NSImageView imageViewWithImage:img];
         NSLog(@"%@", img);
         
